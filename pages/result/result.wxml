@@ -1,0 +1,32 @@
+<view class="page-container">
+  <view class="stars"></view>
+
+  <view class="btn-back" bindtap="goBack">← 重新测试</view>
+
+  <view class="poster-box" id="poster">
+    <view class="top-section">
+      <text class="poster-title">星 言</text>
+      <text class="poster-date">{{todayDate}}</text>
+    </view>
+
+    <view class="content-section">
+      <view class="quote-wrapper">
+        <text class="quote-mark">"</text>
+        <text class="quote">{{reading.quote}}</text>
+      </view>
+
+      <view class="tags-container">
+        <block wx:for="{{reading.tags}}" wx:key="*this">
+          <text class="tag"># {{item}}</text>
+        </block>
+      </view>
+    </view>
+
+    <view class="bottom-section">
+      <text class="advice">{{reading.advice}}</text>
+      <text class="footer-info">长按保存图片 · 开启深度解析</text>
+    </view>
+  </view>
+
+  <view class="tip-text">✨ 长按海报保存至相册 ✨</view>
+</view>
