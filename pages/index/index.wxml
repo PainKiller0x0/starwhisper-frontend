@@ -23,7 +23,7 @@
         class="custom-textarea" 
         placeholder="例如: 最近工作压力好大，很迷茫..." 
         placeholder-class="placeholder"
-        model:value="{{trouble}}" 
+        model:value="{{trouble}}"
       ></textarea>
     </view>
     
@@ -34,40 +34,5 @@
   <view class="loader-container" wx:if="{{step === 'loading'}}">
     <view class="orb"></view>
     <view class="loader-text">正在连接你的专属磁场...</view>
-  </view>
-</view>
-</view>
-
-  <!-- 结果海报展示 -->
-  <view class="poster-view" wx:if="{{step === 'poster' && reading}}">
-    <view class="btn-back" bindtap="resetFlow">← 重新测试</view>
-    
-    <view class="poster-box" id="poster">
-      <view class="top-section">
-        <text class="poster-title">星 言</text>
-        <text class="poster-date">{{todayDate}}</text>
-      </view>
-
-      <view class="content-section">
-        <view class="quote-wrapper">
-          <text class="quote-mark">“</text>
-          <text class="quote">{{reading.quote}}</text>
-        </view>
-        
-        <view class="tags-container">
-          <block wx:for="{{reading.tags}}" wx:key="*this">
-            <text class="tag"># {{item}}</text>
-          </block>
-        </view>
-      </view>
-
-      <view class="bottom-section">
-        <text class="advice">{{reading.advice}}</text>
-        <text class="footer-info">长按保存图片 · 开启深度解析</text>
-      </view>
-    </view>
-    
-    <!-- 长按提示由于目前只是UI海报，可以利用小程序官方的保存组件或直接截图展示，这里先保持UI一致性 -->
-    <view class="tip-text">✨ 截图保存属于你的星空疗愈 ✨</view>
   </view>
 </view>
