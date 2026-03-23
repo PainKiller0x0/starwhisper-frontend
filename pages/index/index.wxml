@@ -50,33 +50,42 @@
     <view class="loader-text flying">星空指引已送达...</view>
   </view>
 
-  <!-- 结果展示 - 从底部滑出 -->
-  <view class="result-container {{step === 'result' ? 'slide-up' : ''}}" wx:if="{{step === 'result'}}">
-    <view class="result-content">
-      <view class="result-header">
-        <text class="result-title">星 言</text>
-        <text class="result-date">{{todayDate}}</text>
+  <!-- 结果展示 -->
+  <view class="result-page" wx:if="{{step === 'result'}}">
+    <view class="result-scroll">
+      <!-- 海报卡片 -->
+      <view class="poster-card">
+        <!-- 顶部 -->
+        <view class="poster-top">
+          <text class="poster-logo">星 言</text>
+          <text class="poster-date">{{todayDate}}</text>
+        </view>
+
+        <!-- 核心内容 -->
+        <view class="poster-main">
+          <view class="poster-quote-box">
+            <text class="poster-quote-mark">"</text>
+            <text class="poster-quote-text">{{reading.quote}}</text>
+          </view>
+
+          <view class="poster-tags">
+            <block wx:for="{{reading.tags}}" wx:key="*this">
+              <text class="poster-tag">#{{item}}</text>
+            </block>
+          </view>
+        </view>
+
+        <!-- 底部 -->
+        <view class="poster-bottom">
+          <text class="poster-advice">{{reading.advice}}</text>
+          <text class="poster-footer">长按保存 · 开启深度解析</text>
+        </view>
       </view>
 
-      <view class="result-body">
-        <view class="quote-wrapper">
-          <text class="quote-mark">"</text>
-          <text class="quote">{{reading.quote}}</text>
-        </view>
-        
-        <view class="tags-container">
-          <block wx:for="{{reading.tags}}" wx:key="*this">
-            <text class="tag"># {{item}}</text>
-          </block>
-        </view>
-      </view>
-
-      <view class="result-footer">
-        <text class="advice">{{reading.advice}}</text>
-        <text class="footer-info">截图保存 · 开启深度解析</text>
+      <!-- 操作按钮 -->
+      <view class="result-actions">
+        <button class="btn-retry" bindtap="resetFlow">重新测试</button>
       </view>
     </view>
-
-    <button class="btn-back" bindtap="resetFlow">重新测试</button>
   </view>
 </view>
