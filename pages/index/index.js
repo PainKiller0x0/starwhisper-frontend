@@ -3,16 +3,24 @@ const platform = require('../../utils/platform');
 
 Page({
   data: {
-    step: 'input', // 'input', 'loading'
+    step: 'input', // 'input', 'breathing', 'flying', 'result'
     name: '',
     trouble: '',
     platform: 'unknown',
-    deviceInfo: null
+    deviceInfo: null,
+    reading: null,
+    todayDate: ''
   },
 
   async onLoad() {
     // 获取平台信息
     await this.initPlatform();
+    
+    // 设置日期
+    const d = new Date();
+    this.setData({
+      todayDate: `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
+    });
   },
 
   /**
@@ -51,7 +59,8 @@ Page({
     this.setData({
       step: 'input',
       name: '',
-      trouble: ''
+      trouble: '',
+      reading: null
     });
   },
 
@@ -65,7 +74,8 @@ Page({
       return;
     }
 
-    this.setData({ step: 'loading' });
+    // 开始呼吸动画
+    this.setData({ step: 'breathing' });
 
     // 根据平台选择不同的请求方式
     this.requestReading();
@@ -84,20 +94,19 @@ Page({
       },
       success: (res) => {
         if (res.data && res.data.quote) {
-          // 添加延迟，让加载动画更优雅
+          // 呼吸动画持续2秒，然后开始飞行动画
           setTimeout(() => {
-            // 跳转到结果页面
-            const dataStr = encodeURIComponent(JSON.stringify(res.data));
-            wx.navigateTo({
-              url: `/pages/result/result?data=${dataStr}`,
-              success: () => {
-                // 跳转成功后重置状态
-                setTimeout(() => {
-                  this.setData({ step: 'input' });
-                }, 300);
-              }
+            // 切换到飞行阶段
+            this.setData({ 
+              step: 'flying',
+              reading: res.data
             });
-          }, 800);
+            
+            // 飞行动画持续1.2秒，然后显示结果
+            setTimeout(() => {
+              this.setData({ step: 'result' });
+            }, 1200);
+          }, 2000);
         } else {
           wx.showToast({ title: res.data.error || '请求失败', icon: 'none' });
           this.setData({ step: 'input' });
@@ -109,5 +118,5 @@ Page({
         this.setData({ step: 'input' });
       }
     });
-  }
+  },
 });
