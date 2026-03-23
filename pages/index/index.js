@@ -1,14 +1,50 @@
 const app = getApp();
+const platform = require('../../utils/platform');
 
 Page({
   data: {
     step: 'input', // 'input', 'loading'
     name: '',
-    trouble: ''
+    trouble: '',
+    platform: 'unknown',
+    deviceInfo: null
   },
 
-  onLoad() {
-    // 页面加载
+  async onLoad() {
+    // 获取平台信息
+    await this.initPlatform();
+  },
+
+  /**
+   * 初始化平台信息
+   */
+  async initPlatform() {
+    try {
+      const deviceInfo = await platform.getDeviceInfo();
+      this.setData({
+        platform: deviceInfo.platformType,
+        deviceInfo: deviceInfo
+      });
+      
+      console.log('Current platform:', deviceInfo.platformType);
+      
+      // 如果是 HarmonyOS，进行特定适配
+      if (deviceInfo.platformType === platform.PLATFORM.HARMONY) {
+        this.applyHarmonyAdaptations();
+      }
+    } catch (err) {
+      console.error('Platform init failed:', err);
+    }
+  },
+
+  /**
+   * 应用 HarmonyOS 适配
+   */
+  applyHarmonyAdaptations() {
+    console.log('Applying HarmonyOS adaptations...');
+    
+    // HarmonyOS 可能需要调整动画参数
+    // 可以在这里设置特定的数据或样式
   },
 
   resetFlow() {
@@ -31,6 +67,14 @@ Page({
 
     this.setData({ step: 'loading' });
 
+    // 根据平台选择不同的请求方式
+    this.requestReading();
+  },
+
+  /**
+   * 请求星语数据
+   */
+  requestReading() {
     wx.request({
       url: `${app.globalData.backendUrl}/api/generate-reading`,
       method: 'POST',

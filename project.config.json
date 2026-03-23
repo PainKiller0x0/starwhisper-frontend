@@ -33,7 +33,7 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "3.3.4",
+  "libVersion": "3.7.0",
   "appid": "wx8b8b8b8b8b8b8b8b",
   "projectname": "starwhisper",
   "condition": {},
