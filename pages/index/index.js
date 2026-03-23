@@ -64,6 +64,18 @@ Page({
     });
   },
 
+  /**
+   * 显示深度解析提示
+   */
+  showAnalysisTip() {
+    wx.showModal({
+      title: '深度解析',
+      content: '深度解析功能即将上线，敬请期待！\n\n如需体验，请添加助理微信获取专属星盘解析。',
+      showCancel: false,
+      confirmText: '我知道了'
+    });
+  },
+
   generateReading() {
     if (!this.data.name) {
       wx.showToast({ title: '请告诉我你的名字或昵称', icon: 'none' });

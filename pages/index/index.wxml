@@ -52,6 +52,12 @@
 
   <!-- 结果展示 -->
   <view class="result-page" wx:if="{{step === 'result'}}">
+    <!-- 顶部返回按钮 -->
+    <view class="result-back-btn" bindtap="resetFlow">
+      <text class="back-arrow">←</text>
+      <text class="back-text">返回</text>
+    </view>
+
     <view class="result-scroll">
       <!-- 海报卡片 -->
       <view class="poster-card">
@@ -81,11 +87,12 @@
           <text class="poster-footer">长按保存 · 开启深度解析</text>
         </view>
       </view>
+    </view>
 
-      <!-- 操作按钮 -->
-      <view class="result-actions">
-        <button class="btn-retry" bindtap="resetFlow">重新测试</button>
-      </view>
+    <!-- 底部固定按钮 - 大拇指友好位置 -->
+    <view class="result-bottom-bar">
+      <button class="btn-deep-analysis" bindtap="showAnalysisTip">深度解析</button>
+      <button class="btn-retry-bottom" bindtap="resetFlow">再测一次</button>
     </view>
   </view>
 </view>
