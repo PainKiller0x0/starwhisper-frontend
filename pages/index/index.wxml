@@ -3,7 +3,7 @@
   <view class="stars"></view>
 
   <!-- 输入域 -->
-  <view class="glass-panel" wx:if="{{step === 'input'}}">
+  <view class="glass-panel {{step === 'loading' ? 'fade-out' : ''}}" wx:if="{{step === 'input' || step === 'loading'}}">
     <view class="title">星 言</view>
     <view class="subtitle">专属你的疗愈星空</view>
     
@@ -13,7 +13,8 @@
         class="custom-input" 
         placeholder="例如: 小星" 
         placeholder-class="placeholder"
-        model:value="{{name}}" 
+        model:value="{{name}}"
+        disabled="{{step === 'loading'}}"
       />
     </view>
     
@@ -24,10 +25,17 @@
         placeholder="例如: 最近工作压力好大，很迷茫..." 
         placeholder-class="placeholder"
         model:value="{{trouble}}"
+        disabled="{{step === 'loading'}}"
       ></textarea>
     </view>
     
-    <button class="btn-primary" bindtap="generateReading">开启星空指引</button>
+    <button 
+      class="btn-primary {{step === 'loading' ? 'btn-loading' : ''}}" 
+      bindtap="generateReading"
+      disabled="{{step === 'loading'}}"
+    >
+      {{step === 'loading' ? '连接中...' : '开启星空指引'}}
+    </button>
   </view>
 
   <!-- 加载状态 -->

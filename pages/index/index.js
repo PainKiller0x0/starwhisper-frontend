@@ -84,12 +84,20 @@ Page({
       },
       success: (res) => {
         if (res.data && res.data.quote) {
-          // 跳转到结果页面
-          const dataStr = encodeURIComponent(JSON.stringify(res.data));
-          wx.navigateTo({
-            url: `/pages/result/result?data=${dataStr}`
-          });
-          this.setData({ step: 'input' });
+          // 添加延迟，让加载动画更优雅
+          setTimeout(() => {
+            // 跳转到结果页面
+            const dataStr = encodeURIComponent(JSON.stringify(res.data));
+            wx.navigateTo({
+              url: `/pages/result/result?data=${dataStr}`,
+              success: () => {
+                // 跳转成功后重置状态
+                setTimeout(() => {
+                  this.setData({ step: 'input' });
+                }, 300);
+              }
+            });
+          }, 800);
         } else {
           wx.showToast({ title: res.data.error || '请求失败', icon: 'none' });
           this.setData({ step: 'input' });
