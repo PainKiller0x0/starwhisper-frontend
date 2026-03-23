@@ -36,6 +36,7 @@
     <view class="loader-text">正在连接你的专属磁场...</view>
   </view>
 </view>
+</view>
 
   <!-- 结果海报展示 -->
   <view class="poster-view" wx:if="{{step === 'poster' && reading}}">
