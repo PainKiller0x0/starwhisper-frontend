@@ -4,7 +4,13 @@
 
   <!-- 输入域 -->
   <view class="glass-panel {{step === 'loading' ? 'fade-out' : ''}}" wx:if="{{step === 'input' || step === 'loading'}}">
-    <view class="title">星 言</view>
+    <view class="title-row">
+      <text class="title">星 言</text>
+      <view class="history-btn" bindtap="goHistory">
+        <text class="history-icon">✦</text>
+        <text class="history-text">我的星语</text>
+      </view>
+    </view>
     <view class="subtitle">专属你的疗愈星空</view>
     
     <view class="input-group">
@@ -84,7 +90,10 @@
         <!-- 底部 -->
         <view class="poster-bottom">
           <text class="poster-advice">{{reading.advice}}</text>
-          <text class="poster-footer">长按保存 · 开启深度解析</text>
+          <view class="poster-footer">
+            <text class="footer-text">长按保存 · 开启深度解析</text>
+            <text class="footer-watermark">搜索「星言」小程序获取你的专属星语</text>
+          </view>
         </view>
       </view>
     </view>

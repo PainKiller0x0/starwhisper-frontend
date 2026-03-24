@@ -1,0 +1,51 @@
+<view class="page-container">
+  <!-- 繁星背景 -->
+  <view class="stars"></view>
+
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-arrow">←</text>
+    </view>
+    <text class="header-title">我的星语</text>
+    <view class="header-right">
+      <text class="clear-btn" bindtap="clearAll" wx:if="{{!isEmpty}}">清空</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <view class="empty-icon">✨</view>
+    <text class="empty-title">还没有星语记录</text>
+    <text class="empty-desc">每次测试都会生成专属的星空疗愈文案</text>
+    <button class="btn-go-test" bindtap="goTest">去测试</button>
+  </view>
+
+  <!-- 历史列表 -->
+  <scroll-view class="history-list" scroll-y wx:if="{{!isEmpty}}">
+    <view class="history-item" 
+          wx:for="{{historyList}}" 
+          wx:key="index"
+          bindtap="viewDetail"
+          data-index="{{index}}">
+      
+      <view class="item-header">
+        <text class="item-date">{{item.date}}</text>
+        <view class="item-delete" catchtap="deleteItem" data-index="{{index}}">
+          <text class="delete-icon">×</text>
+        </view>
+      </view>
+
+      <view class="item-content">
+        <text class="item-quote">{{item.quote}}</text>
+      </view>
+
+      <view class="item-footer">
+        <view class="item-tags">
+          <text class="item-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">#{{tag}}</text>
+        </view>
+        <text class="item-arrow">›</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

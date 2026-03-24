@@ -65,6 +65,53 @@ Page({
   },
 
   /**
+   * 保存到历史记录
+   */
+  saveToHistory(reading) {
+    try {
+      const d = new Date();
+      const dateStr = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
+      
+      const historyItem = {
+        quote: reading.quote,
+        tags: reading.tags || [],
+        advice: reading.advice || '',
+        name: this.data.name,
+        trouble: this.data.trouble,
+        date: dateStr,
+        createTime: d.toISOString()
+      };
+      
+      // 获取现有历史记录
+      let historyList = wx.getStorageSync('starwhisper_history') || [];
+      
+      // 添加新记录到开头
+      historyList.unshift(historyItem);
+      
+      // 限制最多保存50条记录
+      if (historyList.length > 50) {
+        historyList = historyList.slice(0, 50);
+      }
+      
+      // 保存到本地存储
+      wx.setStorageSync('starwhisper_history', historyList);
+      
+      console.log('历史记录已保存');
+    } catch (e) {
+      console.error('保存历史记录失败:', e);
+    }
+  },
+
+  /**
+   * 跳转到历史页面
+   */
+  goHistory() {
+    wx.navigateTo({
+      url: '/pages/history/history'
+    });
+  },
+
+  /**
    * 显示深度解析提示
    */
   showAnalysisTip() {
@@ -113,6 +160,9 @@ Page({
               step: 'flying',
               reading: res.data
             });
+            
+            // 保存历史记录
+            this.saveToHistory(res.data);
             
             // 飞行动画持续1.2秒，然后显示结果
             setTimeout(() => {
