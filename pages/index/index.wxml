@@ -100,6 +100,10 @@
 
     <!-- 底部固定按钮 - 大拇指友好位置 -->
     <view class="result-bottom-bar">
+      <button class="btn-share" open-type="share">
+        <text class="share-icon">📤</text>
+        <text class="share-text">分享给朋友</text>
+      </button>
       <button class="btn-deep-analysis" bindtap="showAnalysisTip">深度解析</button>
       <button class="btn-retry-bottom" bindtap="resetFlow">再测一次</button>
     </view>

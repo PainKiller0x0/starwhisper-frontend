@@ -556,6 +556,30 @@ page {
   letter-spacing: 2rpx;
 }
 
+.btn-share {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 24rpx 0;
+  border-radius: 48rpx;
+  letter-spacing: 2rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.share-icon {
+  font-size: 28rpx;
+}
+
+.share-text {
+  font-size: 28rpx;
+}
+
 /* 调整滚动区域，避免被底部按钮遮挡 */
 .result-scroll {
   padding-bottom: 160rpx;

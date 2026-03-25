@@ -181,4 +181,32 @@ Page({
       }
     });
   },
+
+  /**
+   * 分享给朋友
+   */
+  onShareAppMessage() {
+    const quote = this.data.reading?.quote || '';
+    const shortQuote = quote.length > 20 ? quote.substring(0, 20) + '...' : quote;
+    
+    return {
+      title: `我的星语：${shortQuote}`,
+      path: '/pages/index/index',
+      imageUrl: '/images/share-cover.png' // 如果有分享封面图的话
+    };
+  },
+
+  /**
+   * 分享到朋友圈
+   */
+  onShareTimeline() {
+    const quote = this.data.reading?.quote || '';
+    const shortQuote = quote.length > 20 ? quote.substring(0, 20) + '...' : quote;
+    
+    return {
+      title: `我的星语：${shortQuote}`,
+      query: '',
+      imageUrl: '/images/share-cover.png' // 如果有分享封面图的话
+    };
+  }
 });
